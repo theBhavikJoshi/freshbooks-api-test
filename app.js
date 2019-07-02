@@ -34,7 +34,7 @@ app.get('/projects', (req, res, next) => {
     let headers = {
         "Authorization": `Bearer ${token}`
     };
-    axios.get(url)
+    axios.get(url, {headers: headers})
     .then((response) => {
         console.log('Proj res: ', response);
     })
