@@ -1,6 +1,7 @@
 var express = require("express");
 const axios = require('axios');
 var app = express();
+let token = '';
 
 app.get("/redirect", (req, res, next) => {
     // console.log('Data: ', req);
@@ -20,11 +21,27 @@ app.get("/redirect", (req, res, next) => {
     .post(url, data, {headers: headers})
     .then((response) => {
         console.log('Response: ', response);
+        token = response.data.access_token;
     })
     .catch((error) => {
         console.log('Error: ', error);
     })
     res.send('Hello');
+});
+
+app.get('/projects', (req, res, next) => {
+    let url = 'https://api.freshbooks.com/projects/business/2214806/projects';
+    let headers = {
+        "Authorization": `Bearer ${token}`
+    };
+    axios.get(url)
+    .then((response) => {
+        console.log('Proj res: ', response);
+    })
+    .catch((error) => {
+        console.log('Error: ', error);
+    })
+    res.send('Yes');
 });
 
 
