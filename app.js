@@ -4,7 +4,7 @@ var app = express();
 let token = '';
 
 app.get("/redirect", (req, res, next) => {
-    // console.log('Data: ', req);
+    console.log('Data: ', req);
     let headers = {
         "Api-Version": "alpha",
         "Content-Type": "application/json"
